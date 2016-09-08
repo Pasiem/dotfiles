@@ -70,11 +70,6 @@ if is_win==0 && domain !=? 'ec' && domain !=? 'neptec-small' && domain!=? 'schoo
 	Plug 'rdnetto/YCM-Generator', {'branch': 'stable'}
 endif
 
-if domain !=? 'neptec-small' && domain !=? 'school'
-	" PHP Complete
-	Plug 'shawncplus/phpcomplete.vim'
-endif
-
 if domain !=? 'neptec-small' && domain !=? 'ec' && domain != 'siteground'
 	" NERD Tree - file explorer for vim
 	Plug 'scrooloose/nerdtree'
