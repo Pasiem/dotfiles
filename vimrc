@@ -306,11 +306,7 @@ if has('gui_running')
 	set background=dark
 endif
 
-if domain ==? 'school' || domain ==? 'ec' || !filereadable("/usr/bin/php")
-	colorscheme onedark
-else
-	call <SID>RandColorScheme()
-endif
+colorscheme onedark
 
 " OS Detection
 if is_win
