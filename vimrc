@@ -62,7 +62,7 @@ if domain !=? 'neptec-small'
 	Plug 'joshdick/onedark.vim'
 endif
 
-if is_win==0 && domain !=? 'ec' && domain !=? 'neptec-small' && domain!=? 'school' && domain !=? 'siteground'
+if is_win==0 && domain !=? 'ec' && domain !=? 'neptec-small' && domain!=? 'school'
 	" YouCompleteMe
 	Plug 'Valloric/YouCompleteMe'
 
@@ -314,9 +314,7 @@ let g:cpp_class_scope_highlight = 1
 
 " Tell vim to set the current directory to the directory
 " of the file being opened:
-if domain !=? 'siteground'
-	set autochdir
-endif
+set autochdir
 
 " Have vim reload a file if it has changed outside
 " of vim:
