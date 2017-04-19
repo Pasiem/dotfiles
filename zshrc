@@ -55,6 +55,7 @@ if [[ -e ${HOME}/dotfiles/antigen/antigen.zsh ]]; then
 	export BULLETTRAIN_RUBY_SHOW=false
 	export BULLETTRAIN_GIT_BG="green"
 	export BULLETTRAIN_DIR_FG="black"
+	export BULLETTRAIN_DIR_FG="black"
 
 	antigen theme caiogondim/bullet-train-oh-my-zsh-theme bullet-train
 
@@ -103,39 +104,15 @@ setopt no_share_history
 # Autocompletion with an arrow-key driven interface
 zstyle ':completion:*' menu select
 
-# Autocompletion of command line switches for aliases
-setopt completealiases
+# This option allows me to tab complete branch names with the oh-my-zsh git aliases.
+# http://zsh.sourceforge.net/Doc/Release/Options.html#index-COMPLETEALIASES
+setopt nocomplete_aliases
 
 # Ignore untracked files for showing status on prompt
 export DISABLE_UNTRACKED_FILES_DIRTY=true
 
 # Get number pad return/enter key to work
 #bindkey "${terminfo[kent]}" accept-line
-
-# ###########################################################
-# # Define some keys ( http://zshwiki.org/home/zle/bindkeys )
-# #
-# # Not sure if these are still needed.  I had only implemented
-# # them on dena
-# # #
-# typeset -A key
-# key[Home]=${terminfo[khome]}
-# key[End]=${terminfo[kend]}
-# key[Insert]=${terminfo[kich1]}
-# key[Delete]=${terminfo[kdch1]}
-# key[Up]=${terminfo[kcuu1]}
-# key[Down]=${terminfo[kcud1]}
-# key[Left]=${terminfo[kcub1]}
-# key[Right]=${terminfo[kcuf1]}
-# key[PageUp]=${terminfo[kpp]}
-# key[PageDown]=${terminfo[knp]}
-#
-# # Setting up more key bindings
-# bindkey '' beginning-of-line
-# bindkey '' end-of-line
-# bindkey '' history-incremental-search-backward
-# bindkey "${key[Delete]}" delete-char
-# ###########################################################
 
 # Alises
 if [ -e ${HOME}/.bash_aliases ]; then
@@ -210,28 +187,12 @@ if [[ $? == 1 ]]; then
 fi;
 
 
-if [[ -e $(which fuck 2>/dev/null) ]]; then
-	eval "$(thefuck --alias)"
-fi
-
-if [[ $(hostname) == "khea" ]]; then
-	module use /usr/local/Modules/default/modulefiles/
-	module load modules
-
-	module load khea
-
-	#module load mayofest
-	#module load diplomacy
-	module load bona
-	#module load youtuber
-
-	# CMC
-	export PATH=~newarmn/tools/run-tools/linux24-x86-64/bin:$PATH
-elif [[ $(hostname) == "pof" || $(hostname) == "tinder" || $(hostname) == "grinder" ]]; then
+if [[ $(hostname) == "blendr" || $(hostname) == "grinder" ]]; then
 	module use /usr/share/modules/modulefiles
 	module load modules
 
 	module load neptec 3dri
+	module load qt
 
 	# Ensure Google Test tests always show colour output:
 	export GTEST_COLOR=yes
@@ -241,46 +202,8 @@ elif [[ $(hostname) == "pof" || $(hostname) == "tinder" || $(hostname) == "grind
 		source /usr/share/zsh/functions/Completion/_ninja
 	fi;
 
-elif [[ $(hostname) = dena* ]]; then
-	# This should be a system "module use"!
-	module use /cm/shared/denaModules
-
-	if [[ $(hostname) = dena[5-6] ]]; then
-		module use /software/arch/intel64/modules/all
-	else
-		module use /software/arch/amd64/modules/all
-	fi
-
-	# PGI
-	module use /cm/shared/apps/pgi/modulefiles
-
-	# defaults
-	module load shared modules
-
-	# Development
-	module load pgi64/2013 slurm
-
-	if [[ $(hostname) == "dena" ]]; then
-		# Admin modules
-		module load cmsh cmgui
-	fi
-
-elif [[ "$(hostname)" == "pontus.cee.carleton.ca" ]]; then
-	module load pontus
-
-elif [[ "$(uname -o)" == "Cygwin" ]]; then
-	# This targets windows laptop at Neptec
-
-	# Modules isn't available here, so duplicate the most common aliases
-	if [[ "${modules_enabled}" == "0" ]]; then
-		base=${HOME}/workspace/opal2
-		ARCH=o2win64
-		export bld=${base}/build-3dri-${ARCH}-release
-		ws=${base}/3dri/Applications/OPAL2/3DRiWebScheduler
-		export wss=${ws}/src
-		export wsi=${ws}/include/3DRiWebScheduler
-	fi
 fi;
+
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
